@@ -1,7 +1,7 @@
 import test from 'ava'
 import html2pug from './src'
 
-test('transforms html document to pug with default options', t => {
+test('transforms html document to pug with default options', (t) => {
   const html = `<!doctype html>
 <html lang="en">
   <head>
@@ -28,12 +28,12 @@ html(lang='en')
   t.is(generated, pug)
 })
 
-test('result contains no outer html element when fragment is truthy', t => {
+test('result contains no outer html element when fragment is truthy', (t) => {
   const generated = html2pug('<h1>Hello World!</h1>', { fragment: true })
   t.falsy(generated.startsWith('html'))
 })
 
-test('respects whitespace within elements', t => {
+test('respects whitespace within elements', (t) => {
   const html = `<!doctype html>
 <html lang="en">
   <head>
@@ -75,7 +75,7 @@ html(lang='en')
   t.is(generated, pug)
 })
 
-test('creates multiline block when linebreaks are present', t => {
+test('creates multiline block when linebreaks are present', (t) => {
   const html = '<textarea>multi\nline\nstring</textarea>'
   const pug = `textarea.
   multi
@@ -86,7 +86,7 @@ test('creates multiline block when linebreaks are present', t => {
   t.is(generated, pug)
 })
 
-test('uses div tag shorthand when id/class is present', t => {
+test('uses div tag shorthand when id/class is present', (t) => {
   const html = "<div id='foo' class='bar'>baz</div>"
   const pug = '#foo.bar baz'
 
@@ -94,7 +94,7 @@ test('uses div tag shorthand when id/class is present', t => {
   t.is(generated, pug)
 })
 
-test('removes whitespace between HTML elements', t => {
+test('removes whitespace between HTML elements', (t) => {
   const html = `<ul class="list">
   <li>one</li>
   <li>two</li>
@@ -115,7 +115,7 @@ test('removes whitespace between HTML elements', t => {
   t.is(generated, pug)
 })
 
-test('does not fail on unicode characters', t => {
+test('does not fail on unicode characters', (t) => {
   const generated = html2pug('<h1 class="accents">â, é, ï, õ, ù</h1>', {
     fragment: true,
   })
@@ -124,7 +124,7 @@ test('does not fail on unicode characters', t => {
   t.is(generated, expected)
 })
 
-test('uses tabs when tabs is truthy', t => {
+test('uses tabs when tabs is truthy', (t) => {
   const generated = html2pug('<div><span>Tabs!</span></div>', {
     fragment: true,
     tabs: true,
@@ -134,7 +134,7 @@ test('uses tabs when tabs is truthy', t => {
   t.is(generated, expected)
 })
 
-test('uses a comma to separate attributes', t => {
+test('uses a comma to separate attributes', (t) => {
   const generated = html2pug('<input type="text" name="foo" />', {
     fragment: true,
   })
@@ -143,7 +143,7 @@ test('uses a comma to separate attributes', t => {
   t.is(generated, expected)
 })
 
-test('uses a space to separate attributes', t => {
+test('uses a space to separate attributes', (t) => {
   const generated = html2pug('<input type="text" name="foo" />', {
     fragment: true,
     commas: false,
@@ -153,7 +153,7 @@ test('uses a space to separate attributes', t => {
   t.is(generated, expected)
 })
 
-test('uses double quotes for attribute values', t => {
+test('uses double quotes for attribute values', (t) => {
   const generated = html2pug('<input type="text" name="foo" />', {
     fragment: true,
     doubleQuotes: true,
@@ -163,7 +163,7 @@ test('uses double quotes for attribute values', t => {
   t.is(generated, expected)
 })
 
-test('single quotes in attribute values are escaped', t => {
+test('single quotes in attribute values are escaped', (t) => {
   const generated = html2pug(
     `<button aria-label="closin&apos;" onclick="window.alert('bye')">close</button>`,
     {
@@ -175,7 +175,7 @@ test('single quotes in attribute values are escaped', t => {
   t.is(generated, expected)
 })
 
-test('collapses boolean attributes', t => {
+test('collapses boolean attributes', (t) => {
   const generated = html2pug(
     `<input type="text" name="foo" disabled="disabled" readonly="readonly" />`,
     { fragment: true }

@@ -30,13 +30,12 @@ const help = `
 
 // print logs to stdout and exits the process
 const print = (text, exitCode = 0) => {
-  /* eslint-disable no-console */
   if (exitCode === 1) {
     console.error(text)
   } else {
     console.log(text)
   }
-  /* eslint-enable no-console */
+
   process.exit(exitCode)
 }
 
@@ -65,5 +64,5 @@ const options = {
 }
 
 convert(options)
-  .then(result => print(result))
-  .catch(err => print(err, 1))
+  .then((result) => print(result))
+  .catch((err) => print(err, 1))

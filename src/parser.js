@@ -4,7 +4,7 @@ const DIV_NODE = 'div'
 const COMMENT_NODE = '#comment'
 const COMMENT_NODE_PUG = '//'
 
-const hasSingleTextNodeChild = node => {
+const hasSingleTextNodeChild = (node) => {
   return (
     node.childNodes &&
     node.childNodes.length === 1 &&
@@ -141,7 +141,7 @@ class Parser {
 
     // Create a multiline node
     const indentChild = this.getIndent(level + 1)
-    const multiline = lines.map(line => `${indentChild}${line}`).join('\n')
+    const multiline = lines.map((line) => `${indentChild}${line}`).join('\n')
 
     return `${result}${blockChar}\n${multiline}`
   }
