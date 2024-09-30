@@ -1,5 +1,5 @@
-import test from 'ava'
-import html2pug from './src'
+const test = require('ava')
+const html2pug = require('./src')
 
 test('transforms html document to pug with default options', (t) => {
   const html = `<!doctype html>
